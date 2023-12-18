@@ -1,0 +1,32 @@
+.wrapper {
+	width: 40%;
+	height: 100%;
+	margin: auto;
+	background-color: antiquewhite;
+	display: flex;
+	flex-direction: column;
+	border-left: solid 1px #d6d9dc;
+	padding: 20px;
+}
+.menuWrapper {
+	display: flex;
+	flex-direction: column;
+}
+.wrapper h2 {
+	all: unset;
+	color: black;
+	font-size: 25px;
+}
+
+.topWrapper {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+.signUpButton {
+	color: white !important;
+	background-color: #155ca2;
+}
+.signUpButton:hover {
+	background-color: #134e8a;
+}
