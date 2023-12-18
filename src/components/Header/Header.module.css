@@ -1,0 +1,55 @@
+.header {
+	height: 55px;
+	width: 100%;
+	border-top: solid 3px #e7700d;
+	border-bottom: solid 1px #d6d9dc;
+	padding: 10px;
+	box-sizing: border-box;
+}
+.wrapper {
+	width: 70%;
+	height: 100%;
+	margin: auto;
+	display: flex;
+	justify-content: space-between;
+}
+
+.logo {
+	display: flex;
+	align-items: center;
+}
+
+.nav {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	color: #0c0d0e;
+}
+
+.navList {
+	list-style: none;
+	display: flex;
+	gap: 20px;
+}
+
+.navItem {
+	margin: 0;
+}
+
+.buttonWrapper {
+	display: flex;
+	gap: 5px;
+}
+.loginButton:hover {
+	background-color: #d6e8fa;
+}
+.logOutButton:hover {
+	background-color: #d6e8fa;
+}
+.signUpButton {
+	color: white !important;
+	background-color: #155ca2;
+}
+.signUpButton:hover {
+	background-color: #134e8a;
+}

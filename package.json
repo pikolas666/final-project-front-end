@@ -1,24 +1,29 @@
 {
-  "name": "final-project-front-end",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
-  },
-  "dependencies": {
-    "react": "^18",
-    "react-dom": "^18",
-    "next": "14.0.4"
-  },
-  "devDependencies": {
-    "typescript": "^5",
-    "@types/node": "^20",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
-    "eslint": "^8",
-    "eslint-config-next": "14.0.4"
-  }
+	"name": "final-project-front-end",
+	"version": "0.1.0",
+	"private": true,
+	"scripts": {
+		"dev": "next dev",
+		"build": "next build",
+		"start": "next start",
+		"lint": "next lint"
+	},
+	"dependencies": {
+		"@types/js-cookie": "^3.0.6",
+		"@types/react-helmet": "^6.1.11",
+		"axios": "^1.6.2",
+		"js-cookie": "^3.0.5",
+		"next": "14.0.4",
+		"react": "^18",
+		"react-dom": "^18",
+		"react-helmet": "^6.1.0"
+	},
+	"devDependencies": {
+		"@types/node": "^20",
+		"@types/react": "^18",
+		"@types/react-dom": "^18",
+		"eslint": "^8",
+		"eslint-config-next": "14.0.4",
+		"typescript": "^5"
+	}
 }
