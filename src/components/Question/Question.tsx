@@ -21,6 +21,9 @@ const Question: React.FC<QuestionComponentType> = ({ question }) => {
 	return (
 		<div className={styles.wrapper}>
 			<div className={styles.topWrapper}>
+				<div className={styles.asnwerCount}>
+					{`${question.answers?.length} answers` || `0 answers`}
+				</div>
 				<h3>{question.question_text}</h3>
 			</div>
 		</div>

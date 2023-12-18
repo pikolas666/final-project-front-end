@@ -7,5 +7,15 @@
 }
 .wrapper h3 {
 	all: unset;
-	color: #155ca2;
+	color: #1b75d0;
+}
+.topWrapper {
+	display: flex;
+	gap: 2rem;
+}
+.answerCountWrapper {
+	flex: 1;
+}
+.question_text {
+	flex: 3;
 }

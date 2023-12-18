@@ -11,6 +11,7 @@
 .menuWrapper {
 	display: flex;
 	flex-direction: column;
+	margin-bottom: 1rem;
 }
 .wrapper h2 {
 	all: unset;
@@ -25,8 +26,40 @@
 }
 .signUpButton {
 	color: white !important;
-	background-color: #155ca2;
+	background-color: #1b75d0;
 }
 .signUpButton:hover {
 	background-color: #134e8a;
+}
+.bottomWrapper {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-top: 1rem;
+}
+.filterButton {
+	all: unset;
+	cursor: pointer;
+	height: 25px;
+	border: solid 1px rgb(156, 156, 156);
+	padding: 6px;
+	font-size: 12px;
+	color: rgb(103, 102, 102);
+}
+.filterButton:hover {
+	background-color: rgb(221, 220, 220);
+}
+
+.filterButtonLeft {
+	border-radius: 6px;
+	border-top-right-radius: 0;
+	border-bottom-right-radius: 0;
+	border-right: none;
+}
+
+.filterButtonRight {
+	border-radius: 6px;
+	border-top-left-radius: 0;
+	border-bottom-left-radius: 0;
+	border-left: none;
 }
