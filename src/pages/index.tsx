@@ -1,15 +1,12 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
-import styles from "@/styles/Home.module.css";
 import Head from "@/components/Head/Head";
 import PageTemplate from "@/components/PageTemplate/PageTemplate";
 import Questions from "@/components/Questions/Questions";
 
 export default function Home() {
 	const [questions, setQuestions] = useState<Array<any> | null>(null);
-	const router = useRouter();
-
 	useEffect(() => {
 		const getQuestions = async () => {
 			try {

@@ -1,0 +1,48 @@
+.formWrapper {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.title {
+	font-size: 2rem;
+	margin-bottom: 20px;
+}
+
+.form {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	align-items: center;
+}
+
+.form input {
+	width: 100%;
+	padding: 6px;
+	margin-bottom: 10px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+}
+
+.registerButton {
+	justify-content: center;
+	background-color: #1b75d0;
+	color: white !important;
+}
+
+.registerButton:hover {
+	background-color: #134e8a;
+}
+
+.message {
+	margin-top: 20px;
+	font-weight: bold;
+}
+
+.success {
+	color: green;
+}
+
+.error {
+	color: red;
+}

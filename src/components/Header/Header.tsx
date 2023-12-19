@@ -14,15 +14,15 @@ const Header = () => {
 
 	useEffect(() => {
 		const savedCookie = cookie.get("jwt_token");
-
-		if (savedCookie) {
-			setIsLoggedIn(true);
-		}
+		setIsLoggedIn(!!savedCookie);
 	}, []);
+
 	const onLogOut = () => {
 		cookie.remove("jwt_token");
+		setIsLoggedIn(false);
 		router.push("/");
 	};
+
 	return (
 		<header className={styles.header}>
 			<div className={styles.wrapper}>

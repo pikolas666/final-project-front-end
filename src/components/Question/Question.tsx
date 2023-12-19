@@ -1,9 +1,6 @@
 import React from "react";
 import { useEffect } from "react";
-
 import styles from "./Question.module.css";
-import Link from "next/link";
-import Button from "../Button/Button";
 import { useRouter } from "next/router";
 import NameAndDate from "../NameAndDate/NameAndDate";
 
@@ -12,7 +9,7 @@ type QuestionType = {
 	id: string;
 	question_text: string;
 	date: string;
-	user_id: number;
+	user_id: string;
 	user: string;
 };
 

@@ -13,10 +13,11 @@ const Questions: React.FC<QuestionsType> = ({ questions }) => {
 	const [questionsToShow, setQuestionsToShow] = useState<Array<any>>([]);
 	const answered = questions
 		?.filter((question) => question.answers.length > 0)
-		.sort((a, b) => a.answers.length - b.answers.length);
+		.sort((a, b) => b.answers.length - a.answers.length);
+
 	const unanswered = questions
 		?.filter((question) => question.answers.length === 0)
-		.sort((a, b) => a.date - b.date);
+		.sort((a, b) => b.date - a.date);
 
 	const [isLoading, setIsLoading] = useState(false);
 
@@ -25,10 +26,8 @@ const Questions: React.FC<QuestionsType> = ({ questions }) => {
 			setIsLoading(true);
 
 			try {
-				// Simulate asynchronous data fetching (replace with your actual fetching logic)
 				await new Promise((resolve) => setTimeout(resolve, 1000));
 
-				// Set the questions once data is fetched
 				setQuestionsToShow(questions || []);
 			} catch (error) {
 				console.error("Error fetching questions:", error);

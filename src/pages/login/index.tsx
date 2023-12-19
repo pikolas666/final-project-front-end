@@ -11,6 +11,8 @@ const Login = () => {
 
 	const [email, setEmail] = useState<string>("");
 	const [password, setPassword] = useState<string>("");
+	const [messageText, setMessageText] = useState("");
+	const [isLoggedIn, setIsLoggedIn] = useState(false);
 
 	const onLogin = async () => {
 		try {
@@ -26,12 +28,13 @@ const Login = () => {
 
 			if (response.status === 200) {
 				cookie.set("jwt_token", response.data.token);
+				setIsLoggedIn(true);
+				setMessageText("logged in");
 				router.push("/");
 			}
-
-			console.log("response", response);
 		} catch (err) {
 			console.error("Error during login:", err);
+			setMessageText("Error during login");
 		}
 	};
 
@@ -56,6 +59,13 @@ const Login = () => {
 						onClick={onLogin}
 						text="Log in"
 					></Button>
+				</div>
+				<div
+					className={`${styles.message} ${
+						isLoggedIn ? styles.success : styles.error
+					}`}
+				>
+					{messageText}
 				</div>
 			</div>
 		</PageTemplate>

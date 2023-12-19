@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
+import cookie from "js-cookie";
 import PageTemplate from "@/components/PageTemplate/PageTemplate";
 import styles from "./styles.module.css";
 import DeleteQuestionButton from "@/components/DeleteQuestionButton/DeleteQuestionButton";
 import DeleteQuestionModal from "@/components/DeleteQuestionModal/DeleteQuestionModal";
 import NameAndDate from "@/components/NameAndDate/NameAndDate";
 import Answer from "@/components/Answer/Answer";
-import DeleteAnswerModal from "@/components/DeleteAnswerModal/DeleteAnswerModal";
 
 type QuestionType = {
 	answers: Array<any> | null;
 	id: string;
 	question_text: string;
 	date: string;
-	user_id: number;
+	user_id: string;
 	user: string;
 };
 
@@ -24,6 +24,7 @@ const Question = () => {
 	const [isShowModal, setIsShowModal] = useState(false);
 
 	const router = useRouter();
+	const questionId = router.query.id;
 
 	const fetchQuestion = async (id: string) => {
 		try {
@@ -46,8 +47,13 @@ const Question = () => {
 	};
 
 	const deleteQuestion = async (id: string) => {
+		const headers = {
+			authorization: cookie.get("jwt_token"),
+		};
 		try {
-			await axios.delete(`${process.env.SERVER_URL}/question/${id}`);
+			await axios.delete(`${process.env.SERVER_URL}/question/${id}`, {
+				headers,
+			});
 			router.push("/");
 		} catch (error) {
 			console.error("Error deleting question:", error);
@@ -55,8 +61,11 @@ const Question = () => {
 	};
 
 	const deleteAnswer = async (id: string) => {
+		const headers = {
+			authorization: cookie.get("jwt_token"),
+		};
 		try {
-			await axios.delete(`${process.env.SERVER_URL}/answer/${id}`);
+			await axios.delete(`${process.env.SERVER_URL}/answer/${id}`, { headers });
 			router.query.id && fetchAnswer(router.query.id as string);
 		} catch (error) {
 			console.error("Error deleting answer:", error);
@@ -97,6 +106,17 @@ const Question = () => {
 					text="Delete question"
 					setIsShowModal={setIsShowModal}
 				/>
+				<button
+					className={styles.answerButton}
+					onClick={() => {
+						localStorage.setItem("id", questionId as string);
+						router.push(`/answer`);
+					}}
+				>
+					{" "}
+					Answer
+				</button>
+
 				{answers ? (
 					answers.map((answer) => (
 						<Answer

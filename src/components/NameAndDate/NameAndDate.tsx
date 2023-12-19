@@ -6,7 +6,7 @@ type QuestionType = {
 	id: string;
 	question_text: string;
 	date: string;
-	user_id: number;
+	user_id: string;
 	user: string;
 };
 

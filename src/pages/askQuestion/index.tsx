@@ -12,11 +12,10 @@ const AskQuestion = () => {
 	const [question_text, setQuestion_text] = useState<string>("");
 	const [message, setMessage] = useState<string>("");
 
-	const headers = {
-		authorization: cookie.get("jwt_token"),
-	};
-
 	const onAskQuestion = async () => {
+		const headers = {
+			authorization: cookie.get("jwt_token"),
+		};
 		try {
 			const body = {
 				question_text: question_text,
@@ -32,7 +31,6 @@ const AskQuestion = () => {
 				setMessage("Please log in to ask questions.");
 				router.push("/login");
 			} else if (response.status === 200) {
-				cookie.set("jwt_token", response.data.token);
 				setMessage("Question submitted successfully!");
 				router.push("/");
 			} else {
