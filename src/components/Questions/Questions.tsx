@@ -1,22 +1,45 @@
-import React from "react";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Question from "../Question/Question";
 import styles from "./Questions.module.css";
 import Button from "../Button/Button";
 import router from "next/router";
+import Spinner from "../Spinner/Spinner";
 
 type QuestionsType = {
 	questions: Array<any> | null;
 };
 
 const Questions: React.FC<QuestionsType> = ({ questions }) => {
-	const [questionsToShow, setQuestionsToShow] = useState(questions);
+	const [questionsToShow, setQuestionsToShow] = useState<Array<any>>([]);
 	const answered = questions
 		?.filter((question) => question.answers.length > 0)
 		.sort((a, b) => a.answers.length - b.answers.length);
 	const unanswered = questions
 		?.filter((question) => question.answers.length === 0)
 		.sort((a, b) => a.date - b.date);
+
+	const [isLoading, setIsLoading] = useState(false);
+
+	useEffect(() => {
+		const fetchData = async () => {
+			setIsLoading(true);
+
+			try {
+				// Simulate asynchronous data fetching (replace with your actual fetching logic)
+				await new Promise((resolve) => setTimeout(resolve, 1000));
+
+				// Set the questions once data is fetched
+				setQuestionsToShow(questions || []);
+			} catch (error) {
+				console.error("Error fetching questions:", error);
+			} finally {
+				setIsLoading(false);
+			}
+		};
+
+		fetchData();
+	}, [questions]);
+
 	return (
 		<div className={styles.wrapper}>
 			<div className={styles.menuWrapper}>
@@ -25,7 +48,7 @@ const Questions: React.FC<QuestionsType> = ({ questions }) => {
 					<Button
 						className={styles.signUpButton}
 						onClick={() => {
-							router.push("/question");
+							router.push("/askQuestion");
 						}}
 						text="Ask Question"
 					/>
@@ -40,7 +63,7 @@ const Questions: React.FC<QuestionsType> = ({ questions }) => {
 						<button
 							className={`${styles.filterButton} ${styles.filterButtonLeft}`}
 							onClick={() => {
-								setQuestionsToShow(answered || null);
+								setQuestionsToShow(answered! || null);
 							}}
 						>
 							answered
@@ -48,7 +71,7 @@ const Questions: React.FC<QuestionsType> = ({ questions }) => {
 						<button
 							className={styles.filterButton}
 							onClick={() => {
-								setQuestionsToShow(questions || null);
+								setQuestionsToShow(questions! || null);
 							}}
 						>
 							all
@@ -56,7 +79,7 @@ const Questions: React.FC<QuestionsType> = ({ questions }) => {
 						<button
 							className={`${styles.filterButton} ${styles.filterButtonRight}`}
 							onClick={() => {
-								setQuestionsToShow(unanswered || null);
+								setQuestionsToShow(unanswered! || null);
 							}}
 						>
 							unanswered
@@ -64,10 +87,19 @@ const Questions: React.FC<QuestionsType> = ({ questions }) => {
 					</div>
 				</div>
 			</div>
-			{questionsToShow &&
-				questionsToShow.map((question) => (
-					<Question key={question._id} question={question} />
-				))}
+			{isLoading ? (
+				<Spinner />
+			) : (
+				<>
+					{questionsToShow && questionsToShow.length > 0 ? (
+						questionsToShow.map((question) => (
+							<Question key={question._id} question={question} />
+						))
+					) : (
+						<p>No questions to display.</p>
+					)}
+				</>
+			)}
 		</div>
 	);
 };

@@ -1,0 +1,28 @@
+.wrapper {
+	width: 40%;
+	height: 100%;
+	margin: auto;
+	background-color: antiquewhite;
+	display: flex;
+	flex-direction: column;
+	border-left: solid 1px #d6d9dc;
+	padding: 20px;
+	box-sizing: border-box;
+	justify-content: flex-start;
+}
+.questionTopWrapper {
+	display: flex;
+	justify-content: space-between;
+}
+.title {
+	all: unset;
+	padding: 10px;
+	font-size: 18px;
+}
+.signUpButton {
+	color: white !important;
+	background-color: #1b75d0;
+}
+.signUpButton:hover {
+	background-color: #134e8a;
+}

@@ -1,0 +1,21 @@
+.wrapper {
+	display: flex;
+	flex-direction: column;
+	margin-top: 2rem;
+}
+.answerTopWrapper {
+	display: flex;
+	gap: 2rem;
+	width: 100%;
+	margin-bottom: 1rem;
+}
+.likesWrapper {
+	width: 10%;
+}
+.answerText {
+	width: 90%;
+}
+.bottomWrapper {
+	display: flex;
+	justify-content: flex-end;
+}

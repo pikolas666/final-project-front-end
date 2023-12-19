@@ -1,21 +1,33 @@
 .wrapper {
-	border: 1px solid #e0e0e0;
-	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	border-top: solid 1px #d6d9dc;
 	padding: 15px;
 	width: 100%;
 	box-sizing: border-box;
 }
-.wrapper h3 {
-	all: unset;
-	color: #1b75d0;
-}
+
 .topWrapper {
+	min-height: 3rem;
 	display: flex;
+	align-items: center;
 	gap: 2rem;
 }
 .answerCountWrapper {
-	flex: 1;
+	display: flex;
+	font-size: 13px;
+	padding: 2px 4px;
+	width: 60px;
+	height: 20px;
+	background-color: #18864b;
+	color: white;
+	border-radius: 3px;
+	align-items: center;
 }
-.question_text {
-	flex: 3;
+.questionText {
+	color: #1b75d0;
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	cursor: pointer;
+	font-weight: 200;
+	font-size: 18px;
 }

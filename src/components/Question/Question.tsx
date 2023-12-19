@@ -4,6 +4,8 @@ import { useEffect } from "react";
 import styles from "./Question.module.css";
 import Link from "next/link";
 import Button from "../Button/Button";
+import { useRouter } from "next/router";
+import NameAndDate from "../NameAndDate/NameAndDate";
 
 type QuestionType = {
 	answers: Array<any> | null;
@@ -11,6 +13,7 @@ type QuestionType = {
 	question_text: string;
 	date: string;
 	user_id: number;
+	user: string;
 };
 
 type QuestionComponentType = {
@@ -18,14 +21,23 @@ type QuestionComponentType = {
 };
 
 const Question: React.FC<QuestionComponentType> = ({ question }) => {
+	const router = useRouter();
 	return (
 		<div className={styles.wrapper}>
 			<div className={styles.topWrapper}>
-				<div className={styles.asnwerCount}>
+				<div className={styles.answerCountWrapper}>
 					{`${question.answers?.length} answers` || `0 answers`}
 				</div>
-				<h3>{question.question_text}</h3>
+				<h3
+					onClick={() => {
+						router.push(`/question/${question.id}`);
+					}}
+					className={styles.questionText}
+				>
+					{question.question_text}
+				</h3>
 			</div>
+			<NameAndDate text="asked: " question={question} />
 		</div>
 	);
 };

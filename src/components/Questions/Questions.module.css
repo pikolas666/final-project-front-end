@@ -40,7 +40,7 @@
 .filterButton {
 	all: unset;
 	cursor: pointer;
-	height: 25px;
+	height: 20px;
 	border: solid 1px rgb(156, 156, 156);
 	padding: 6px;
 	font-size: 12px;

@@ -4,6 +4,7 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import styles from "./styles.module.css";
 import PageTemplate from "@/components/PageTemplate/PageTemplate";
+import Button from "@/components/Button/Button";
 
 const Login = () => {
 	const router = useRouter();
@@ -36,7 +37,8 @@ const Login = () => {
 
 	return (
 		<PageTemplate>
-			<main className={styles.main}>
+			<div className={styles.formWrapper}>
+				<h1 className={styles.title}>Log in</h1>
 				<div className={styles.form}>
 					<input
 						placeholder="email"
@@ -49,9 +51,13 @@ const Login = () => {
 						onChange={(e) => setPassword(e.target.value)}
 						type="password"
 					/>
-					<button onClick={onLogin}>Login</button>
+					<Button
+						className={styles.button}
+						onClick={onLogin}
+						text="Log in"
+					></Button>
 				</div>
-			</main>
+			</div>
 		</PageTemplate>
 	);
 };

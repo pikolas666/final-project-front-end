@@ -4,7 +4,7 @@ import styles from "./Button.module.css";
 type ButtonType = {
 	text: string;
 	className: string;
-	onClick: () => void;
+	onClick: () => void | null | Promise<void>;
 };
 
 const Button: React.FC<ButtonType> = ({ text, className, onClick }) => {

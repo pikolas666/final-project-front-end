@@ -21,6 +21,7 @@ const Header = () => {
 	}, []);
 	const onLogOut = () => {
 		cookie.remove("jwt_token");
+		router.push("/");
 	};
 	return (
 		<header className={styles.header}>

@@ -1,0 +1,13 @@
+.bottomWrapper {
+	display: flex;
+	justify-content: flex-end;
+	gap: 0.5rem;
+	align-items: center;
+}
+.user {
+	font-size: 12px;
+	color: #1b75d0;
+}
+.date {
+	font-size: 12px;
+}
