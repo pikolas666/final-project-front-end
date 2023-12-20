@@ -1,31 +1,31 @@
 import React from "react";
-import styles from "./DeleteAnswerModal.module.css";
+import styles from "./DeleteModal.module.css";
 
-type DeleteAnswerModalType = {
+type DeleteModalType = {
 	deleteAction: () => void;
-	setIsShowAnswerModal: React.Dispatch<React.SetStateAction<boolean>>;
+	setIsShowModal: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const DeleteAnswerModal: React.FC<DeleteAnswerModalType> = ({
+const DeleteModal: React.FC<DeleteModalType> = ({
 	deleteAction,
-	setIsShowAnswerModal,
+	setIsShowModal,
 }) => {
 	return (
 		<div className={styles.wrapper}>
 			<div
 				className={styles.x}
 				onClick={() => {
-					setIsShowAnswerModal(false);
+					setIsShowModal(false);
 				}}
 			>
 				X
 			</div>
-			<h2>Delete Answer?</h2>
+			<h2>Are you sure you want to delete?</h2>
 			<button
 				className={styles.button}
 				onClick={() => {
 					deleteAction();
-					setIsShowAnswerModal(false);
+					setIsShowModal(false);
 				}}
 			>
 				Yes
@@ -33,7 +33,7 @@ const DeleteAnswerModal: React.FC<DeleteAnswerModalType> = ({
 			<button
 				className={styles.button}
 				onClick={() => {
-					setIsShowAnswerModal(false);
+					setIsShowModal(false);
 				}}
 			>
 				No
@@ -42,4 +42,4 @@ const DeleteAnswerModal: React.FC<DeleteAnswerModalType> = ({
 	);
 };
 
-export default DeleteAnswerModal;
+export default DeleteModal;

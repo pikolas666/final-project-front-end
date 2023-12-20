@@ -4,8 +4,8 @@ import { useRouter } from "next/router";
 import cookie from "js-cookie";
 import PageTemplate from "@/components/PageTemplate/PageTemplate";
 import styles from "./styles.module.css";
-import DeleteQuestionButton from "@/components/DeleteQuestionButton/DeleteQuestionButton";
-import DeleteQuestionModal from "@/components/DeleteQuestionModal/DeleteQuestionModal";
+import DeleteButton from "@/components/DeleteButton/DeleteButton";
+import DeleteModal from "@/components/DeleteModal/DeleteModal";
 import NameAndDate from "@/components/NameAndDate/NameAndDate";
 import Answer from "@/components/Answer/Answer";
 
@@ -84,7 +84,7 @@ const Question = () => {
 		<PageTemplate>
 			<div className={styles.wrapper}>
 				{isShowModal && (
-					<DeleteQuestionModal
+					<DeleteModal
 						setIsShowModal={setIsShowModal}
 						deleteAction={() => {
 							deleteQuestion(question!.id);
@@ -102,7 +102,8 @@ const Question = () => {
 						</div>
 					</>
 				)}
-				<DeleteQuestionButton
+				<DeleteButton
+					className=""
 					text="Delete question"
 					setIsShowModal={setIsShowModal}
 				/>
@@ -116,13 +117,14 @@ const Question = () => {
 					{" "}
 					Answer
 				</button>
+				<h4>Answers:</h4>
 
 				{answers ? (
 					answers.map((answer) => (
 						<Answer
 							key={answer._id}
 							answer={answer}
-							setIsShowAnswerModal={setIsShowModal}
+							setIsShowModal={setIsShowModal}
 							deleteAnswer={() => deleteAnswer(answer._id)}
 						/>
 					))

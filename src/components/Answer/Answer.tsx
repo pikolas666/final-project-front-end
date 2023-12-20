@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styles from "./Answer.module.css";
 import NameAndDate from "../NameAndDate/NameAndDate";
-import DeleteAnswerButton from "../DeleteAnswerButton/DeleteAnswerButton";
-import DeleteAnswerModal from "../DeleteAnswerModal/DeleteAnswerModal";
+import DeleteButton from "../DeleteButton/DeleteButton";
+import DeleteModal from "../DeleteModal/DeleteModal";
 
 type AnswerType = {
 	answer_text: string;
@@ -18,20 +18,17 @@ type AnswerComponentType = {
 	answer: AnswerType;
 
 	deleteAnswer: (id: string) => void;
-	setIsShowAnswerModal: React.Dispatch<React.SetStateAction<boolean>>;
+	setIsShowModal: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const Answer: React.FC<AnswerComponentType> = ({
-	answer,
-
-	deleteAnswer,
-}) => {
-	const [isShowAnswerModal, setIsShowAnswerModal] = useState(false);
+const Answer: React.FC<AnswerComponentType> = ({ answer, deleteAnswer }) => {
+	const [isShowModal, setIsShowModal] = useState(false);
+	const [likes, setLikes] = useState(0);
 	return (
 		<div className={styles.wrapper}>
-			{isShowAnswerModal && (
-				<DeleteAnswerModal
-					setIsShowAnswerModal={setIsShowAnswerModal}
+			{isShowModal && (
+				<DeleteModal
+					setIsShowModal={setIsShowModal}
 					deleteAction={() => {
 						deleteAnswer(answer.id);
 					}}
@@ -39,16 +36,88 @@ const Answer: React.FC<AnswerComponentType> = ({
 			)}
 			<div className={styles.answerTopWrapper}>
 				<div className={styles.likesWrapper}>
-					{answer.gained_likes_number} likes
+					<div
+						className={styles.svgWrapper}
+						onClick={() => setLikes((previous) => previous + 1)}
+					>
+						<svg
+							width="800px"
+							height="800px"
+							viewBox="0 0 32 32"
+							version="1.1"
+							xmlns="http://www.w3.org/2000/svg"
+							xmlnsXlink="http://www.w3.org/1999/xlink"
+						>
+							<title>chevron-up-circle</title>
+							<desc>Created with Sketch Beta.</desc>
+							<defs></defs>
+							<g
+								id="Page-1"
+								stroke="none"
+								stroke-width="1"
+								fill="none"
+								fill-rule="evenodd"
+							>
+								<g
+									id="Icon-Set"
+									transform="translate(-152.000000, -1087.000000)"
+									fill="#000000"
+								>
+									<path
+										d="M168,1117 C160.268,1117 154,1110.73 154,1103 C154,1095.27 160.268,1089 168,1089 C175.732,1089 182,1095.27 182,1103 C182,1110.73 175.732,1117 168,1117 L168,1117 Z M168,1087 C159.164,1087 152,1094.16 152,1103 C152,1111.84 159.164,1119 168,1119 C176.836,1119 184,1111.84 184,1103 C184,1094.16 176.836,1087 168,1087 L168,1087 Z M168.879,1098.46 C168.639,1098.22 168.311,1098.15 168,1098.21 C167.689,1098.15 167.361,1098.22 167.121,1098.46 L159.464,1106.12 C159.074,1106.51 159.074,1107.15 159.464,1107.54 C159.855,1107.93 160.488,1107.93 160.879,1107.54 L168,1100.41 L175.121,1107.54 C175.512,1107.93 176.145,1107.93 176.536,1107.54 C176.926,1107.15 176.926,1106.51 176.536,1106.12 L168.879,1098.46 L168.879,1098.46 Z"
+										id="chevron-up-circle"
+									></path>
+								</g>
+							</g>
+						</svg>
+					</div>
+					{/* {answer.gained_likes_number} */}
+					{likes}
+					<div
+						className={styles.svgWrapper}
+						onClick={() => setLikes((previous) => previous - 1)}
+					>
+						<svg
+							width="800px"
+							height="800px"
+							viewBox="0 0 32 32"
+							version="1.1"
+							xmlns="http://www.w3.org/2000/svg"
+							xmlnsXlink="http://www.w3.org/1999/xlink"
+						>
+							<title>chevron-down-circle</title>
+							<desc>Created with Sketch Beta.</desc>
+							<defs></defs>
+							<g
+								id="Page-1"
+								stroke="none"
+								stroke-width="1"
+								fill="none"
+								fill-rule="evenodd"
+							>
+								<g
+									id="Icon-Set"
+									transform="translate(-204.000000, -1087.000000)"
+									fill="#000000"
+								>
+									<path
+										d="M227.121,1098.46 L220,1105.59 L212.879,1098.46 C212.488,1098.07 211.855,1098.07 211.464,1098.46 C211.074,1098.86 211.074,1099.49 211.464,1099.88 L219.122,1107.54 C219.361,1107.78 219.689,1107.85 220,1107.79 C220.311,1107.85 220.639,1107.78 220.879,1107.54 L228.536,1099.88 C228.926,1099.49 228.926,1098.86 228.536,1098.46 C228.145,1098.07 227.512,1098.07 227.121,1098.46 L227.121,1098.46 Z M220,1117 C212.268,1117 206,1110.73 206,1103 C206,1095.27 212.268,1089 220,1089 C227.732,1089 234,1095.27 234,1103 C234,1110.73 227.732,1117 220,1117 L220,1117 Z M220,1087 C211.164,1087 204,1094.16 204,1103 C204,1111.84 211.164,1119 220,1119 C228.837,1119 236,1111.84 236,1103 C236,1094.16 228.837,1087 220,1087 L220,1087 Z"
+										id="chevron-down-circle"
+									></path>
+								</g>
+							</g>
+						</svg>
+					</div>
 				</div>
 				<div className={styles.answerText}>{answer.answer_text}</div>
 			</div>
 			<div className={styles.bottomWrapper}>
 				<NameAndDate text="answered: " answer={answer} />
 			</div>
-			<DeleteAnswerButton
+			<DeleteButton
+				className={styles.deleteAnswerButton}
 				text="Delete answer"
-				setIsShowModal={setIsShowAnswerModal}
+				setIsShowModal={setIsShowModal}
 			/>
 		</div>
 	);

@@ -14,6 +14,11 @@
 }
 .likesWrapper {
 	width: 10%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 3px;
 }
 .answerText {
 	width: 90%;
@@ -21,4 +26,15 @@
 .bottomWrapper {
 	display: flex;
 	justify-content: flex-end;
+}
+.deleteAnswerButton {
+	background-color: rgb(187, 142, 142);
+}
+.svgWrapper {
+	height: 30px;
+	width: 30px;
+}
+.svgWrapper svg {
+	height: 100%;
+	width: 100%;
 }

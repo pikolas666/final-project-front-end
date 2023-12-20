@@ -45,3 +45,10 @@
 .answerButton:hover {
 	background-color: #116137;
 }
+.wrapper h4 {
+	display: flex;
+	justify-content: center;
+	border-top: solid 1px #d6d9dc;
+	color: #656565;
+	padding-top: 10px;
+}

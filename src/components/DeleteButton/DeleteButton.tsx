@@ -1,18 +1,20 @@
 import React from "react";
-import styles from "./DeleteAnswerButton.module.css";
+import styles from "./DeleteButton.module.css";
 
-type DeleteAnswerButtonType = {
+type DeleteButtonType = {
 	text: string;
 	setIsShowModal: React.Dispatch<React.SetStateAction<boolean>>;
+	className: string;
 };
 
-const DeleteAnswerButton: React.FC<DeleteAnswerButtonType> = ({
+const DeleteButton: React.FC<DeleteButtonType> = ({
 	text,
 	setIsShowModal,
+	className,
 }) => {
 	return (
 		<button
-			className={styles.deleteButton}
+			className={`${styles.deleteButton} ${className}`}
 			onClick={() => {
 				setIsShowModal(true);
 			}}
@@ -22,4 +24,4 @@ const DeleteAnswerButton: React.FC<DeleteAnswerButtonType> = ({
 	);
 };
 
-export default DeleteAnswerButton;
+export default DeleteButton;
