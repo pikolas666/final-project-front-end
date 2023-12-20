@@ -2,7 +2,6 @@
 	width: 40%;
 	height: 100%;
 	margin: auto;
-	background-color: antiquewhite;
 	display: flex;
 	flex-direction: column;
 	border-left: solid 1px #d6d9dc;
@@ -62,4 +61,19 @@
 	border-top-left-radius: 0;
 	border-bottom-left-radius: 0;
 	border-left: none;
+}
+@media only screen and (max-width: 600px) {
+	.wrapper {
+		width: 95%;
+	}
+}
+@media only screen and (min-width: 600px) {
+	.wrapper {
+		width: 70%;
+	}
+}
+@media only screen and (min-width: 992px) {
+	.wrapper {
+		width: 50%;
+	}
 }

@@ -131,7 +131,6 @@ const Question = () => {
 						<Answer
 							key={answer._id}
 							answer={answer}
-							setIsShowModal={setIsShowModal}
 							deleteAnswer={() => deleteAnswer(answer._id)}
 						/>
 					))

@@ -33,8 +33,12 @@
 .svgWrapper {
 	height: 30px;
 	width: 30px;
+	border-radius: 50%;
 }
 .svgWrapper svg {
 	height: 100%;
 	width: 100%;
+}
+.svgWrapper:hover {
+	background-color: antiquewhite;
 }

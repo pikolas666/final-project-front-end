@@ -53,3 +53,8 @@
 .signUpButton:hover {
 	background-color: #134e8a;
 }
+@media only screen and (max-width: 600px) {
+	.wrapper {
+		width: 95%;
+	}
+}
