@@ -26,3 +26,22 @@
 .signUpButton:hover {
 	background-color: #134e8a;
 }
+
+.answerButton {
+	all: unset;
+	align-self: flex-end;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 50px;
+	height: 15px;
+	padding: 2px 4px;
+	color: white;
+	background-color: #18864b;
+	cursor: pointer;
+	font-size: 12px;
+	border-radius: 3px;
+}
+.answerButton:hover {
+	background-color: #116137;
+}

@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useRouter } from "next/router";
 import Head from "@/components/Head/Head";
 import PageTemplate from "@/components/PageTemplate/PageTemplate";
 import Questions from "@/components/Questions/Questions";

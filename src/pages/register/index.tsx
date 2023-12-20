@@ -17,9 +17,8 @@ const Register: React.FC = () => {
 	const router = useRouter();
 
 	const validateInputs = () => {
-		// Simple email validation regex
 		const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-		// Simple password validation regex (at least 6 characters, one letter, and one digit)
+
 		const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d).{6,}$/;
 
 		if (!name || !email || !password) {
@@ -44,7 +43,6 @@ const Register: React.FC = () => {
 
 	const onRegisterUser = async () => {
 		if (!validateInputs()) {
-			// Validation failed, don't proceed with registration
 			return;
 		}
 

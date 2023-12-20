@@ -2,6 +2,9 @@
 	display: flex;
 	flex-direction: column;
 	margin-top: 2rem;
+	border-top: solid 1px #d6d9dc;
+	margin-top: 1rem;
+	padding-top: 1rem;
 }
 .answerTopWrapper {
 	display: flex;

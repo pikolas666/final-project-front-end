@@ -42,7 +42,7 @@ const AnswerQuestion = () => {
 			);
 			setResponse(response);
 
-			if (response.status === 200) {
+			if (response.status === 201) {
 				setMessageText("Answer added");
 				setTimeout(() => {
 					router.push(`/question/${questionId}`);
