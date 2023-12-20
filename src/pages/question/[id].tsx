@@ -22,13 +22,20 @@ const Question = () => {
 	const [question, setQuestion] = useState<QuestionType | null>(null);
 	const [answers, setAnswers] = useState<Array<any> | null>(null);
 	const [isShowModal, setIsShowModal] = useState(false);
+	const sortedAnswers = answers
+		? answers
+				.slice()
+				.sort((a, b) => b.gained_likes_number - a.gained_likes_number)
+		: [];
 
 	const router = useRouter();
 	const questionId = router.query.id;
 
 	const fetchQuestion = async (id: string) => {
 		try {
-			const response = await axios.get(`http://localhost:3000/question/${id}`);
+			const response = await axios.get(
+				`${process.env.SERVER_URL}/question/${id}`
+			);
 			setQuestion(response.data.question);
 		} catch (error) {
 			console.error("Error fetching question:", error);
@@ -38,7 +45,7 @@ const Question = () => {
 	const fetchAnswer = async (id: string) => {
 		try {
 			const response = await axios.get(
-				`http://localhost:3000/question/${id}/answers`
+				`${process.env.SERVER_URL}/question/${id}/answers`
 			);
 			setAnswers(response.data.answers);
 		} catch (error) {
@@ -119,8 +126,8 @@ const Question = () => {
 				</button>
 				<h4>Answers:</h4>
 
-				{answers ? (
-					answers.map((answer) => (
+				{sortedAnswers.length > 0 ? (
+					sortedAnswers.map((answer) => (
 						<Answer
 							key={answer._id}
 							answer={answer}

@@ -14,7 +14,8 @@ type AnswerType = {
 	answer_text: string;
 	date: string;
 	id: string;
-	gained_likes_number: number;
+	upvotes: string[];
+	downvotes: string[];
 	question_id: string;
 	user_id: string;
 	user: string;
