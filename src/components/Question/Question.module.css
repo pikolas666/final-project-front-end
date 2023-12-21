@@ -12,6 +12,7 @@
 	gap: 2rem;
 }
 .answerCountWrapper {
+	min-width: 60px;
 	display: flex;
 	font-size: 13px;
 	padding: 2px 4px;
@@ -30,4 +31,5 @@
 	cursor: pointer;
 	font-weight: 200;
 	font-size: 18px;
+	overflow: hidden;
 }

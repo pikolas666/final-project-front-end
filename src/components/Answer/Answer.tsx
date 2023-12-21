@@ -5,6 +5,7 @@ import styles from "./Answer.module.css";
 import NameAndDate from "../NameAndDate/NameAndDate";
 import DeleteButton from "../DeleteButton/DeleteButton";
 import DeleteModal from "../DeleteModal/DeleteModal";
+import ErrorMessage from "../ErrorMessage/ErrorMessage";
 
 type AnswerType = {
 	answer_text: string;
@@ -27,6 +28,8 @@ const Answer: React.FC<AnswerComponentType> = ({ answer, deleteAnswer }) => {
 	const [totalLikes, setTotalLikes] = useState(
 		answer.upvotes.length - answer.downvotes.length
 	);
+	const [messageText, setMessage] = useState("");
+	const [showMessage, setShowMessage] = useState(false);
 
 	useEffect(() => {
 		setTotalLikes(answer.upvotes.length - answer.downvotes.length);
@@ -47,8 +50,8 @@ const Answer: React.FC<AnswerComponentType> = ({ answer, deleteAnswer }) => {
 			authorization: cookie.get("jwt_token"),
 		};
 
-		if (!hasUpvoted()) {
-			try {
+		try {
+			if (!hasUpvoted()) {
 				await axios.post(
 					`${process.env.SERVER_URL}/answer/${answer.id}/upvote`,
 					{},
@@ -57,19 +60,32 @@ const Answer: React.FC<AnswerComponentType> = ({ answer, deleteAnswer }) => {
 
 				setTotalLikes((previous) => previous + 1);
 
-				const userId = cookie.get("user_id");
-				answer.upvotes.push(userId as string);
-
-				// If user has previously downvoted, remove the downvote
 				if (hasDownvoted()) {
 					setTotalLikes((previous) => previous - 1);
-					answer.downvotes = answer.downvotes.filter((id) => id !== userId);
 				}
-			} catch (error) {
-				console.error("Error upvoting answer:", error);
+			} else {
+				console.log("User has already upvoted for this answer.");
+				setMessage("User has already upvoted for this answer.");
+				setShowMessage(true);
 			}
-		} else {
-			console.log("User has already upvoted for this answer.");
+		} catch (error) {
+			if (axios.isAxiosError(error)) {
+				const { response } = error;
+
+				if (response?.status === 400) {
+					console.log("User has already upvoted for this answer.");
+					setMessage("User has already upvoted for this answer.");
+					setShowMessage(true);
+				} else if (response?.status === 401) {
+					console.log("Unauthorized: User is not authenticated.");
+					setMessage("Unauthorized: User is not authenticated.");
+					setShowMessage(true);
+				} else {
+					console.error("Error upvoting answer:", error);
+					setMessage("Error upvoting answer");
+					setShowMessage(true);
+				}
+			}
 		}
 	};
 
@@ -78,29 +94,42 @@ const Answer: React.FC<AnswerComponentType> = ({ answer, deleteAnswer }) => {
 			authorization: cookie.get("jwt_token"),
 		};
 
-		if (!hasDownvoted()) {
-			try {
+		try {
+			if (!hasDownvoted()) {
 				await axios.post(
 					`${process.env.SERVER_URL}/answer/${answer.id}/downvote`,
 					{},
 					{ headers }
 				);
 
-				setTotalLikes((previous) => previous - 1); // Decrement totalLikes for downvote
+				setTotalLikes((previous) => previous - 1);
 
-				const userId = cookie.get("user_id");
-				answer.downvotes.push(userId as string);
-
-				// If user has previously upvoted, remove the upvote
 				if (hasUpvoted()) {
 					setTotalLikes((previous) => previous - 1);
-					answer.upvotes = answer.upvotes.filter((id) => id !== userId);
 				}
-			} catch (error) {
-				console.error("Error downvoting answer:", error);
+			} else {
+				console.log("User has already downvoted for this answer.");
+				setMessage("User has already downvoted for this answer.");
+				setShowMessage(true);
 			}
-		} else {
-			console.log("User has already downvoted for this answer.");
+		} catch (error) {
+			if (axios.isAxiosError(error)) {
+				const { response } = error;
+
+				if (response?.status === 400) {
+					console.log("User has already downvoted for this answer.");
+					setMessage("User has already downvoted for this answer.");
+					setShowMessage(true);
+				} else if (response?.status === 401) {
+					console.log("Unauthorized: User is not authenticated.");
+					setMessage("Unauthorized: User is not authenticated.");
+					setShowMessage(true);
+				} else {
+					console.error("Error downvoting answer:", error);
+					setMessage("Error downvoting answer.");
+					setShowMessage(true);
+				}
+			}
 		}
 	};
 
@@ -112,6 +141,14 @@ const Answer: React.FC<AnswerComponentType> = ({ answer, deleteAnswer }) => {
 					deleteAction={() => {
 						deleteAnswer(answer.id);
 					}}
+				/>
+			)}
+			{showMessage && (
+				<ErrorMessage
+					setShowMessage={() => {
+						setShowMessage(false);
+					}}
+					messageText={messageText}
 				/>
 			)}
 			<div className={styles.answerTopWrapper}>

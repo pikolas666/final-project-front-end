@@ -1,0 +1,32 @@
+.wrapper {
+	width: 400px;
+	height: 200px;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-color: #fff;
+	padding: 20px;
+	border: 1px solid #ccc;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	z-index: 10;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.message {
+	font-size: 17px;
+	font-weight: 600;
+	margin-left: 30px;
+}
+
+.closeButton {
+	cursor: pointer;
+	background: none;
+	border: none;
+	font-size: 30px;
+	margin-left: auto;
+	color: #bd3030;
+	align-self: flex-start;
+}

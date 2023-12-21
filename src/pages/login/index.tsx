@@ -4,6 +4,7 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import styles from "./styles.module.css";
 import PageTemplate from "@/components/PageTemplate/PageTemplate";
+import Head from "@/components/Head/Head";
 import Button from "@/components/Button/Button";
 
 const Login = () => {
@@ -22,7 +23,7 @@ const Login = () => {
 			};
 
 			const response = await axios.post(
-				"http://localhost:3000/users/login",
+				`${process.env.SERVER_URL}/users/login`,
 				body
 			);
 
@@ -40,6 +41,7 @@ const Login = () => {
 
 	return (
 		<PageTemplate>
+			<Head title="login page" />
 			<div className={styles.formWrapper}>
 				<h1 className={styles.title}>Log in</h1>
 				<div className={styles.form}>
@@ -49,10 +51,10 @@ const Login = () => {
 						onChange={(e) => setEmail(e.target.value)}
 					/>
 					<input
+						type="password"
 						placeholder="password"
 						value={password}
 						onChange={(e) => setPassword(e.target.value)}
-						type="password"
 					/>
 					<Button
 						className={styles.button}

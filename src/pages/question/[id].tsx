@@ -3,11 +3,13 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import cookie from "js-cookie";
 import PageTemplate from "@/components/PageTemplate/PageTemplate";
+import Head from "@/components/Head/Head";
 import styles from "./styles.module.css";
 import DeleteButton from "@/components/DeleteButton/DeleteButton";
 import DeleteModal from "@/components/DeleteModal/DeleteModal";
 import NameAndDate from "@/components/NameAndDate/NameAndDate";
 import Answer from "@/components/Answer/Answer";
+import ErrorMessage from "@/components/ErrorMessage/ErrorMessage";
 
 type QuestionType = {
 	answers: Array<any> | null;
@@ -22,14 +24,26 @@ const Question = () => {
 	const [question, setQuestion] = useState<QuestionType | null>(null);
 	const [answers, setAnswers] = useState<Array<any> | null>(null);
 	const [isShowModal, setIsShowModal] = useState(false);
-	const sortedAnswers = answers
-		? answers
-				.slice()
-				.sort((a, b) => b.gained_likes_number - a.gained_likes_number)
-		: [];
+	const [messageText, setMessage] = useState("");
+	const [showMessage, setShowMessage] = useState(false);
+	const [sortedAnswers, setSortedAnswers] = useState<Array<any> | null>(null);
 
 	const router = useRouter();
 	const questionId = router.query.id;
+
+	const sortAnswers = () => {
+		const sortedAnswers = answers
+			? answers
+					.slice()
+					.sort(
+						(a, b) =>
+							b.upvotes.length -
+							b.downvotes.length -
+							(a.upvotes.length - a.downvotes.length)
+					)
+			: [];
+		setSortedAnswers(sortedAnswers);
+	};
 
 	const fetchQuestion = async (id: string) => {
 		try {
@@ -54,9 +68,18 @@ const Question = () => {
 	};
 
 	const deleteQuestion = async (id: string) => {
+		const jwtToken = cookie.get("jwt_token");
+
+		if (!jwtToken) {
+			setMessage("You must be logged in to delete a question.");
+			setShowMessage(true);
+			return;
+		}
+
 		const headers = {
-			authorization: cookie.get("jwt_token"),
+			authorization: jwtToken,
 		};
+
 		try {
 			await axios.delete(`${process.env.SERVER_URL}/question/${id}`, {
 				headers,
@@ -64,18 +87,39 @@ const Question = () => {
 			router.push("/");
 		} catch (error) {
 			console.error("Error deleting question:", error);
+			setMessage("Error deleting question:");
+			setShowMessage(true);
+
+			if (axios.isAxiosError(error)) {
+				console.error("Response status:", error.response?.status);
+			}
 		}
 	};
 
 	const deleteAnswer = async (id: string) => {
+		const jwtToken = cookie.get("jwt_token");
+
+		if (!jwtToken) {
+			setMessage("You must be logged in to delete an answer.");
+			setShowMessage(true);
+			return;
+		}
+
 		const headers = {
-			authorization: cookie.get("jwt_token"),
+			Authorization: jwtToken,
 		};
+
 		try {
 			await axios.delete(`${process.env.SERVER_URL}/answer/${id}`, { headers });
 			router.query.id && fetchAnswer(router.query.id as string);
 		} catch (error) {
 			console.error("Error deleting answer:", error);
+			setMessage("Error deleting answer:");
+			setShowMessage(true);
+
+			if (axios.isAxiosError(error)) {
+				console.error("Response status:", error.response?.status);
+			}
 		}
 	};
 
@@ -87,9 +131,22 @@ const Question = () => {
 		router.query.id && fetchAnswer(router.query.id as string);
 	}, [router.query.id]);
 
+	useEffect(() => {
+		sortAnswers();
+	}, [answers]);
+
 	return (
 		<PageTemplate>
+			<Head title="Question Page" />
 			<div className={styles.wrapper}>
+				{showMessage && (
+					<ErrorMessage
+						setShowMessage={() => {
+							setShowMessage(false);
+						}}
+						messageText={messageText}
+					/>
+				)}
 				{isShowModal && (
 					<DeleteModal
 						setIsShowModal={setIsShowModal}
@@ -126,7 +183,7 @@ const Question = () => {
 				</button>
 				<h4>Answers:</h4>
 
-				{sortedAnswers.length > 0 ? (
+				{sortedAnswers && sortedAnswers.length > 0 ? (
 					sortedAnswers.map((answer) => (
 						<Answer
 							key={answer._id}

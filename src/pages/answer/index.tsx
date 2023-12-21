@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import axios, { AxiosResponse, AxiosError } from "axios";
+import axios, { AxiosResponse } from "axios";
 import cookie from "js-cookie";
 import { useRouter } from "next/router";
 import styles from "./styles.module.css";
@@ -17,6 +17,18 @@ const AnswerQuestion = () => {
 	const [questionId, setQuestionId] = useState("");
 
 	const router = useRouter();
+
+	const headers = cookie.get("jwt_token");
+
+	const checkIfLogged = () => {
+		if (!headers) {
+			router.push("/login");
+		}
+	};
+	useEffect(() => {
+		checkIfLogged();
+	}, []);
+
 	useEffect(() => {
 		const storedQuestionId = localStorage.getItem("id");
 
@@ -57,7 +69,7 @@ const AnswerQuestion = () => {
 
 	return (
 		<PageTemplate>
-			<Head title="Ask question Page" />
+			<Head title="Answer page" />
 			<div className={styles.formWrapper}>
 				<h1 className={styles.title}>Add Answer</h1>
 

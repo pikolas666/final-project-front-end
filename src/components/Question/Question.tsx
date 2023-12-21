@@ -1,5 +1,4 @@
 import React from "react";
-import { useEffect } from "react";
 import styles from "./Question.module.css";
 import { useRouter } from "next/router";
 import NameAndDate from "../NameAndDate/NameAndDate";

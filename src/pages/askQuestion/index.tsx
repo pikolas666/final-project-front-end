@@ -1,16 +1,28 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import cookie from "js-cookie";
 import axios from "axios";
 import { useRouter } from "next/router";
 import styles from "./styles.module.css";
 import PageTemplate from "@/components/PageTemplate/PageTemplate";
 import Button from "@/components/Button/Button";
+import Head from "@/components/Head/Head";
 
 const AskQuestion = () => {
 	const router = useRouter();
 
 	const [question_text, setQuestion_text] = useState<string>("");
 	const [message, setMessage] = useState<string>("");
+
+	const headers = cookie.get("jwt_token");
+
+	const checkIfLogged = () => {
+		if (!headers) {
+			router.push("/login");
+		}
+	};
+	useEffect(() => {
+		checkIfLogged();
+	}, []);
 
 	const onAskQuestion = async () => {
 		const headers = {
@@ -22,7 +34,7 @@ const AskQuestion = () => {
 			};
 
 			const response = await axios.post(
-				"http://localhost:3000/question",
+				`${process.env.SERVER_URL}/question`,
 				body,
 				{ headers }
 			);
@@ -46,11 +58,12 @@ const AskQuestion = () => {
 
 	return (
 		<PageTemplate>
+			<Head title="Ask Question page" />
 			<div className={styles.formWrapper}>
 				<h1 className={styles.title}>Ask Question</h1>
 
 				<div className={styles.form}>
-					<input
+					<textarea
 						placeholder="question text"
 						value={question_text}
 						onChange={(e) => setQuestion_text(e.target.value)}

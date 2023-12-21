@@ -10,7 +10,6 @@ export default function Home() {
 		const getQuestions = async () => {
 			try {
 				const response = await axios.get(`${process.env.SERVER_URL}/questions`);
-				console.log(response);
 
 				setQuestions(response.data);
 			} catch (error) {

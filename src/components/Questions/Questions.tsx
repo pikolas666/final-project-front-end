@@ -21,6 +21,26 @@ const Questions: React.FC<QuestionsType> = ({ questions }) => {
 
 	const [isLoading, setIsLoading] = useState(false);
 
+	const [activeFilter, setActiveFilter] = useState("all");
+
+	const handleClick = (filterType: string) => {
+		switch (filterType) {
+			case "answered":
+				setQuestionsToShow(answered || []);
+				break;
+			case "all":
+				setQuestionsToShow(questions || []);
+				break;
+			case "unanswered":
+				setQuestionsToShow(unanswered || []);
+				break;
+			default:
+				break;
+		}
+
+		setActiveFilter(filterType);
+	};
+
 	useEffect(() => {
 		const fetchData = async () => {
 			setIsLoading(true);
@@ -60,26 +80,26 @@ const Questions: React.FC<QuestionsType> = ({ questions }) => {
 					</div>
 					<div className={styles.filterWrapper}>
 						<button
-							className={`${styles.filterButton} ${styles.filterButtonLeft}`}
-							onClick={() => {
-								setQuestionsToShow(answered! || null);
-							}}
+							className={`${styles.filterButton} ${styles.filterButtonLeft} ${
+								activeFilter === "answered" ? styles.filterButtonclicked : ""
+							}`}
+							onClick={() => handleClick("answered")}
 						>
 							answered
 						</button>
 						<button
-							className={styles.filterButton}
-							onClick={() => {
-								setQuestionsToShow(questions! || null);
-							}}
+							className={`${styles.filterButton} ${
+								activeFilter === "all" ? styles.filterButtonclicked : ""
+							}`}
+							onClick={() => handleClick("all")}
 						>
 							all
 						</button>
 						<button
-							className={`${styles.filterButton} ${styles.filterButtonRight}`}
-							onClick={() => {
-								setQuestionsToShow(unanswered! || null);
-							}}
+							className={`${styles.filterButton} ${styles.filterButtonRight} ${
+								activeFilter === "unanswered" ? styles.filterButtonclicked : ""
+							}`}
+							onClick={() => handleClick("unanswered")}
 						>
 							unanswered
 						</button>

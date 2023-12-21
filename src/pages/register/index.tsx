@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import styles from "./styles.module.css";
 import PageTemplate from "@/components/PageTemplate/PageTemplate";
 import Button from "@/components/Button/Button";
+import Head from "@/components/Head/Head";
 
 const Register: React.FC = () => {
 	const [name, setName] = useState("");
@@ -76,6 +77,7 @@ const Register: React.FC = () => {
 
 	return (
 		<PageTemplate>
+			<Head title="Register page" />
 			<div className={styles.formWrapper}>
 				<h1 className={styles.title}>Register</h1>
 
@@ -90,6 +92,7 @@ const Register: React.FC = () => {
 						value={password}
 						onChange={(e) => setPassword(e.target.value)}
 						placeholder="password"
+						type="password"
 					/>
 
 					<input
