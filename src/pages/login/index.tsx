@@ -4,7 +4,7 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import styles from "./styles.module.css";
 import PageTemplate from "@/components/PageTemplate/PageTemplate";
-import Head from "@/components/Head/Head";
+import Head from "next/head";
 import Button from "@/components/Button/Button";
 
 const Login = () => {
@@ -41,7 +41,9 @@ const Login = () => {
 
 	return (
 		<PageTemplate>
-			<Head title="login page" />
+			<Head>
+				<title>Login Page</title>
+			</Head>
 			<div className={styles.formWrapper}>
 				<h1 className={styles.title}>Log in</h1>
 				<div className={styles.form}>

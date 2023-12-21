@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import Head from "@/components/Head/Head";
+import Head from "next/head";
 import PageTemplate from "@/components/PageTemplate/PageTemplate";
 import Questions from "@/components/Questions/Questions";
 
@@ -21,7 +21,9 @@ export default function Home() {
 	}, []);
 	return (
 		<PageTemplate>
-			<Head title="Stackoverflow Home Page" />
+			<Head>
+				<title>Stackoverflow Home Page</title>
+			</Head>
 			<Questions questions={questions} />
 		</PageTemplate>
 	);

@@ -3,7 +3,7 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import cookie from "js-cookie";
 import PageTemplate from "@/components/PageTemplate/PageTemplate";
-import Head from "@/components/Head/Head";
+import Head from "next/head";
 import styles from "./styles.module.css";
 import DeleteButton from "@/components/DeleteButton/DeleteButton";
 import DeleteModal from "@/components/DeleteModal/DeleteModal";
@@ -137,7 +137,10 @@ const Question = () => {
 
 	return (
 		<PageTemplate>
-			<Head title="Question Page" />
+			<Head>
+				<title>Question Page</title>
+			</Head>
+
 			<div className={styles.wrapper}>
 				{showMessage && (
 					<ErrorMessage

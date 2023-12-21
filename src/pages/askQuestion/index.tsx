@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import styles from "./styles.module.css";
 import PageTemplate from "@/components/PageTemplate/PageTemplate";
 import Button from "@/components/Button/Button";
-import Head from "@/components/Head/Head";
+import Head from "next/head";
 
 const AskQuestion = () => {
 	const router = useRouter();
@@ -58,7 +58,9 @@ const AskQuestion = () => {
 
 	return (
 		<PageTemplate>
-			<Head title="Ask Question page" />
+			<Head>
+				<title>Ask Question Page</title>
+			</Head>
 			<div className={styles.formWrapper}>
 				<h1 className={styles.title}>Ask Question</h1>
 

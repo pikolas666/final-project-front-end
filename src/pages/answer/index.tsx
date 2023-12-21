@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import axios, { AxiosResponse } from "axios";
 import cookie from "js-cookie";
 import { useRouter } from "next/router";
+import Head from "next/head";
 import styles from "./styles.module.css";
 import PageTemplate from "@/components/PageTemplate/PageTemplate";
 import Button from "@/components/Button/Button";
-import Head from "@/components/Head/Head";
 
 const AnswerQuestion = () => {
 	const [answerText, setAnswerText] = useState("");
@@ -69,7 +69,9 @@ const AnswerQuestion = () => {
 
 	return (
 		<PageTemplate>
-			<Head title="Answer page" />
+			<Head>
+				<title>Answers page</title>
+			</Head>
 			<div className={styles.formWrapper}>
 				<h1 className={styles.title}>Add Answer</h1>
 
