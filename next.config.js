@@ -2,7 +2,7 @@
 const nextConfig = {
 	reactStrictMode: false,
 	env: {
-		SERVER_URL: "http://127.0.0.1:3000",
+		SERVER_URL: "https://stackoverflow-forum.onrender.com",
 	},
 };
 
